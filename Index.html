@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PujaConnect – Book Pandits & Order Puja Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Bootstrap CSS CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background: #fafcff;
+      color: #222;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .navbar {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+    .main-header {
+      padding: 3rem 0 2rem;
+      background: #fff;
+      text-align: center;
+    }
+    .search-bar {
+      max-width: 430px;
+      margin: 1rem auto 2rem;
+      border-radius: 30px;
+      padding: 0.7rem 1.5rem;
+      font-size: 1.1rem;
+      border: 1px solid #ddd;
+      box-shadow: 0 0 10px rgba(60, 70, 130, 0.03);
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    .search-bar:focus {
+      border-color: #ffbc0d;
+      box-shadow: 0 0 8px #ffbc0d;
+    }
+    .service-section {
+      background: #f7f7fa;
+      padding: 2rem 0;
+    }
+    .section-title {
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+    .service-card {
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.035);
+      transition: 0.2s;
+      background: #fff;
+    }
+    .service-card:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.09);
+    }
+    .service-card img {
+      width: 48px;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+    }
+    .service-card h5 {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .service-card p {
+      color: #444;
+      font-size: 0.945rem;
+      padding: 0 1rem;
+      min-height: 72px;
+    }
+    .service-card .btn {
+      border-radius: 23px;
+      font-weight: 600;
+      margin: 1rem 0 1.5rem 0;
+      background: #ffbc0d;
+      border: none;
+      color: #222;
+      transition: background 0.2s ease;
+    }
+    .service-card .btn:hover {
+      background: #ffd85b;
+      color: #222;
+    }
+    .category-btn {
+      margin-right: 12px;
+      margin-bottom: 8px;
+      border-radius: 16px;
+      padding: 0.7em 1.8em;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .category-btn.btn-warning {
+      background-color: #ffbc0d;
+      border-color: #ffbc0d;
+      color: #222;
+    }
+    .category-btn.btn-warning:hover {
+      background-color: #ffd85b;
+      border-color: #ffd85b;
+      color: #222;
+    }
+    .category-btn.btn-light {
+      background-color: #fff;
+      border-color: #ddd;
+      color: #666;
+    }
+    .category-btn.btn-light:hover {
+      background-color: #fffbf0;
+      border-color: #ffbc0d;
+      color: #222;
+    }
+    .price-tag {
+      background: #ffe897;
+      border-radius: 18px;
+      display: inline-block;
+      padding: 0.23em 1em;
+      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: #5a4a00;
+    }
+    .testimonials-card {
+      background: #fffde7;
+      border-radius: 16px;
+      border: 1px solid #fffcc3;
+      font-size: 1.05rem;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      color: #6a541e;
+    }
+    .footer {
+      color: #777;
+      background: #fff;
+      text-align: center;
+      font-size: 0.98rem;
+      border-top: 1px solid #eee;
+      padding: 1.4rem 0;
+      margin-top: 3rem;
+    }
+
+    /* Puja Samagri Carousel Cards */
+    .carousel-item > .d-flex > .card {
+      flex: 1 0 14rem;
+      max-width: 14rem;
+      margin: 0 0.5rem;
+      border-radius: 20px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+      transition: box-shadow 0.3s ease;
+    }
+    .carousel-item > .d-flex > .card:hover {
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+    }
+    .carousel-item > .d-flex {
+      justify-content: center;
+      flex-wrap: nowrap;
+      gap: 1rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .carousel-item > .d-flex::-webkit-scrollbar {
+      display: none; /* hide scrollbar for better UI */
+    }
+    .card .card-img-top {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      height: 140px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 900px) {
+      .service-card {
+        min-width: 270px;
+        margin: 0 auto 1rem;
+      }
+      .category-btn {
+        margin-bottom: 12px;
+      }
+      .carousel-item > .d-flex {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-light">
+    <div class="container d-flex justify-content-between">
+      <a class="navbar-brand fw-bold" href="#">PujaConnect</a>
+      <a class="btn btn-outline-dark px-4 rounded-pill" href="#">Login / Signup</a>
+    </div>
+  </nav>
+
+  <!-- Main Header -->
+  <div class="main-header text-center">
+    <h1 class="display-5 fw-bold mt-2">Book Pandits, Hassle-Free Puja at Home</h1>
+    <p class="lead">
+      India’s most trusted puja platform for Bengali & Hindu families
+    </p>
+    <input
+      class="search-bar mx-auto shadow-sm"
+      type="text"
+      placeholder="Search Puja, Pandit, or Ritual (e.g. Satyanarayan Puja, Grihapravesh)"
+    />
+    <!-- Category Quicklinks -->
+    <div class="mt-3 d-flex justify-content-center flex-wrap px-3">
+      <button class="btn btn-warning category-btn">Satyanarayan Puja</button>
+      <button class="btn btn-warning category-btn">Vivah (Marriage)</button>
+      <button class="btn btn-warning category-btn">Grihapravesh</button>
+      <button class="btn btn-light category-btn">Navagraha Havan</button>
+      <button class="btn btn-light category-btn">Shanti Puja</button>
+      <button class="btn btn-light category-btn">View All</button>
+    </div>
+  </div>
+
+  <!-- Most Booked Services -->
+  <div class="container service-section">
+    <h2 class="section-title">Most Booked Pujas & Rituals</h2>
+    <div class="row g-4">
+      <div class="col-md-3 col-sm-6">
+        <div class="card service-card p-3 text-center">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/5133/5133698.png"
+            alt="Satyanarayan Puja"
+            class="mx-auto"
+          />
+          <h5>Satyanarayan Puja</h5>
+          <p class="price-tag">₹2,500 onwards</p>
+          <p>
+            Traditional Satyanarayan puja performed at home with all rituals
+            and materials.
+          </p>
+          <a href="#" class="btn btn-warning">Book Now</a>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card service-card p-3 text-center">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1792/1792892.png"
+            alt="Vivah (Marriage)"
+            class="mx-auto"
+          />
+          <h5>Vivah (Marriage)</h5>
+          <p class="price-tag">₹5,100 onwards</p>
+          <p>
+            Book Pandit for traditional Hindu wedding rituals as per your faith
+            & customs.
+          </p>
+          <a href="#" class="btn btn-warning">Book Now</a>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card service-card p-3 text-center">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/857/857681.png"
+            alt="Grihapravesh"
+            class="mx-auto"
+          />
+          <h5>Grihapravesh</h5>
+          <p class="price-tag">₹3,200 onwards</p>
+          <p>New home puja and havan for prosperity; includes complete arrangements.</p>
+          <a href="#" class="btn btn-warning">Book Now</a>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="card service-card p-3 text-center">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4403/4403252.png"
+            alt="Kaal Sarp Dosh Puja"
+            class="mx-auto"
+          />
+          <h5>Kaal Sarp Dosh Puja</h5>
+          <p class="price-tag">₹14,500 onwards</p>
+          <p>Remedy rituals for Kaal Sarp Dosh, performed with proper Vedic chants.</p>
+          <a href="#" class="btn btn-warning">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Browse By Category / Deity -->
+  <div class="container service-section">
+    <h2 class="section-title">Browse by Category</h2>
+    <div class="row g-3 text-center px-3">
+      <div class="col-md-2 col-4">
+        <a href="#" class="btn btn-outline-dark w-100 category-btn">Shanti Puja</a>
+      </div>
+      <div class="col-md-2 col-4">
+        <a href="#" class="btn btn-outline-dark w-100 category-btn">Havans</a>
+      </div>
+      <div class="col-md-2 col-4">
+        <a href="#" class="btn btn-outline-dark w-100 category-btn">Festival Puja</a>
+      </div>
+      <div class="col-md-2 col-4">
+        <a href="#" class="btn btn-outline-dark w-100 category-btn">Path / Jaap</a>
+      </div>
+      <div class="col-md-2 col-4">
+        <a href="#" class="btn btn-outline-dark w-100 category-btn">Funeral & Shradh</a>
+      </div>
+      <div class="col-md-2 col-4">
+        <a href="#" class="btn btn-outline-dark w-100 category-btn">View All</a>
+      </div>
+    </div>
+
+    <h2 class="section-title mt-4">Browse by Deity</h2>
+    <div class="d-flex justify-content-center flex-wrap px-3">
+      <button class="btn btn-light category-btn">Lord Vishnu</button>
+      <button class="btn btn-light category-btn">Lord Shiva</button>
+      <button class="btn btn-light category-btn">Goddess Durga</button>
+      <button class="btn btn-light category-btn">Goddess Lakshmi</button>
+      <button class="btn btn-light category-btn">Lord Ganesha</button>
+      <button class="btn btn-light category-btn">View All</button>
+    </div>
+  </div>
+
+  <!-- Puja Samagri Product Carousel Section -->
+  <div class="container py-5">
+    <h2 class="section-title text-center mb-4">Puja Samagri Essentials</h2>
+
+    <div
+      id="pujaSamagriCarousel"
+      class="carousel slide"
+      data-bs-ride="carousel"
+      data-bs-interval="5000"
+    >
+      <div class="carousel-inner">
+        <!-- First slide -->
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center gap-4 flex-nowrap px-3">
+            <div class="card">
+              <img
+                src="https://images.unsplash.com/photo-1564309154303-7e2e09f0a461?auto=format&fit=crop&w=300&q=80"
+                class="card-img-top"
+                alt="Fresh Flower Basket"
+              />
+              <div class="card-body text-center">
+                <h6 class="card-title">Fresh Flower Basket</h6>
+                <p class="card-text text-muted">Assorted fresh flowers for all pujas</p>
+                <p class="text-warning fw-bold">₹250</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <img
+                src="https://images.unsplash.com/photo-1590080877777-d4a13e94a38b?auto=format&fit=crop&w=300&q=80"
+                class="card-img-top"
+                alt="Incense Sticks"
+              />
+              <div class="card-body text-center">
+                <h6 class="card-title">Incense Sticks Pack</h6>
+                <p class="card-text text-muted">Natural fragrant incense sticks</p>
+                <p class="text-warning fw-bold">₹100</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <img
+                src="https://images.unsplash.com/photo-1605631546597-8da2cc1e6f51?auto=format&fit=crop&w=300&q=80"
+                class="card-img-top"
+                alt="Puja Thali"
+              />
+              <div class="card-body text-center">
+                <h6 class="card-title">Puja Thali Set</h6>
+                <p class="card-text text-muted">All essentials packed in a traditional thali</p>
+                <p class="text-warning fw-bold">₹450</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second slide -->
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center gap-4 flex-nowrap px-3">
+            <div class="card">
+              <img
+                src="https://images.unsplash.com/photo-1586269921966-77fd2ded0c5b?auto=format&fit=crop&w=300&q=80"
+                class="card-img-top"
+                alt="Organic Rice Packet"
+              />
+              <div class="card-body text-center">
+                <h6 class="card-title">Organic Rice Packet</h6>
+                <p class="card-text text-muted">Special rice for ritual purposes</p>
+                <p class="text-warning fw-bold">₹300</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <img
+                src="https://images.unsplash.com/photo-1561896183-4df5f7c5caa5?auto=format&fit=crop&w=300&q=80"
+                class="card-img-top"
+                alt="Haldi (Turmeric) Powder"
+              />
+              <div class="card-body text-center">
+                <h6 class="card-title">Haldi (Turmeric) Powder</h6>
+                <p class="card-text text-muted">Pure premium turmeric for rituals</p>
+                <p class="text-warning fw-bold">₹120</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <img
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80"
+                class="card-img-top"
+                alt="Camphor"
+              />
+              <div class="card-body text-center">
+                <h6 class="card-title">Camphor</h6>
+                <p class="card-text text-muted">Natural camphor cubes for aarti and pooja</p>
+                <p class="text-warning fw-bold">₹200</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousel controls -->
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#pujaSamagriCarousel"
+        data-bs-slide="prev"
+      >
+        <span
+          class="carousel-control-prev-icon bg-dark rounded-circle p-3"
+          aria-hidden="true"
+        ></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#pujaSamagriCarousel"
+        data-bs-slide="next"
+      >
+        <span
+          class="carousel-control-next-icon bg-dark rounded-circle p-3"
+          aria-hidden="true"
+        ></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Testimonials / Ratings -->
+  <div class="container py-5">
+    <h2 class="section-title text-center">What Our Devotees Say</h2>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4">
+        <div class="card testimonials-card p-4">
+          <p class="mb-2">
+            "Booked a Grihapravesh – the Pandit was punctual, knowledgeable, and
+            brought all materials. Flawless!"
+          </p>
+          <span class="fw-bold">– Priya S., Kolkata</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card testimonials-card p-4">
+          <p class="mb-2">
+            "Best platform to find pandits for all occasions, from Satyanarayan
+            Puja to weddings. Highly recommended!"
+          </p>
+          <span class="fw-bold">– Arvind M., Bengaluru</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    © 2025 PujaConnect · Most Trusted Puja & Pandit Booking Platform · Contact:
+    support@pujaconnect.in
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
